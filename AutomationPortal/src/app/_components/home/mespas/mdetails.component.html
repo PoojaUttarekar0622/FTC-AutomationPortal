@@ -1,0 +1,336 @@
+<div class="container-fluid mt-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-stats shadow">
+                <div class="card-header text-right">
+                    <h4 class="font-weight-bold text-green mb-0">{{jsonHeader.sourceType}}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Owner Name</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-building text-red"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control mandatory"
+                                                [(ngModel)]="jsonHeader.owner" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Enquiry Ref Number</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-asterisk text-red"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control mandatory"
+                                                [(ngModel)]="jsonHeader.enqrefNo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Department</label>
+                                        <select class="form-control form-control-sm mandatory"
+                                            [(ngModel)]="jsonHeader.deptName">
+                                            <option *ngFor="let jsonPort of jsonDepartment" value={{jsonPort.deptName}}>
+                                                {{ jsonPort.deptName }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Ship Name</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-ship text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.shipName" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Port Name</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fab fa-megaport text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.port" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Mapping Port</label>
+                                        <select class="form-control form-control-sm nomandatory"
+                                            [(ngModel)]="jsonHeader.mappingPort">
+                                            <option *ngFor="let jsonPort of jsonMappingPort"
+                                                value={{jsonPort.mappingPort}}>
+                                                {{ jsonPort.mappingPort }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Maker</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-asterisk text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.maker" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Equipment</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-building text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.equipment" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Type</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-ship text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.type" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Serial No</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-check text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.serialNo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Item Level</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-check text-green"></i>
+                                                </span>
+                                            </div>
+                                            <select name="ItemLevel" [(ngModel)]="hdrleadTimeforitem"
+                                                class="form-control nomandatory">
+                                                <option value="" selected>Choose your Item level</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Lead Time</label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-clock text-green"></i>
+                                                </span>
+                                            </div>
+                                            <input type="number" class="form-control nomandatory"
+                                                [(ngModel)]="jsonHeader.leadTime" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Lead Time Period </label>
+                                        <div class="input-group input-group-sm input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-history text-green"></i>
+                                                </span>
+                                            </div>
+                                            <select class="form-control nomandatory" name="period"
+                                                [(ngModel)]="leadTimeperiod">
+                                                <option value="" selected>Choose your Lead Time Period</option>
+                                                <option value="D">D</option>
+                                                <option value="W">W</option>
+                                                <option value="M">M</option>
+                                                <option value="Y">Y</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt--4 text-right">
+                        <div class="col-md-12 mb-2">
+                            <button type="button" (click)="saveAsDraft()"
+                                class="btn btn-google-plus btn-icon-only rounded-circle" data-toggle="tooltip"
+                                data-placement="top" ngbTooltip="Save as Draft">
+                                <i class="fas fa-save text-sm font-weight-bold" matTooltip="Save as Draft"></i>
+                            </button>
+                            <button type="button" (click)="addNewRow()"
+                                class="btn btn-twitter btn-icon-only rounded-circle" data-toggle="tooltip"
+                                data-placement="top" ngbTooltip="Add new row">
+                                <i class="fas fa-plus text-sm font-weight-bold" matTooltip="Add"></i>
+                            </button>
+                            <button type="button" (click)="DeleteRow()"
+                                class="btn btn-danger btn-icon-only rounded-circle" data-toggle="tooltip"
+                                data-placement="top" ngbTooltip="Delete row">
+                                <i class="fas fa-trash text-sm font-weight-bold" matTooltip="Delete"></i>
+                            </button>
+                            <button type="button" (click)="btnUpdateData()"
+                                class="btn btn-facebook btn-icon-only rounded-circle">
+                                <i class="fas fa-check text-sm font-weight-bold" matTooltip="Verify"></i>
+                            </button>
+                            <button type="button" (click)="rejectdata()"
+                                class="btn btn-danger btn-icon-only rounded-circle">
+                                <i class="fas fa-minus text-sm font-weight-bold" matTooltip="Reject"></i>
+                            </button>
+                            <button type="button" (click)="btnBack()"
+                                class="btn btn-twitter btn-icon-only rounded-circle">
+                                <i class="fas fa-chevron-left text-sm font-weight-bold" matTooltip="Back"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table border align-items-center table-flush">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" style="width:5%">
+                                                <input type="checkbox" [(ngModel)]="masterSelected" name="list_name"
+                                                    value="m1" (change)="checkUncheckAll()" />
+                                            </th>
+                                            <th scope="col" style="width:8%">Sr.No</th>
+                                            <th scope="col" class="text-center" style="width:8%">A</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col" style="width:10%">IMPA Code</th>
+                                            <th scope="col" style="width:10%">Qty</th>
+                                            <th scope="col" style="width:10%">Unit</th>
+                                            <th scope="col" style="width:10%">Price</th>
+                                            <th scope="col" style="width:10%">Acc No</th>
+                                            <th scope="col" style="width:10%">Lead Time</th>
+                                            <th scope="col" style="width:10%">Period</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let jsonItem of jsonItem;let i = index">
+                                            <td>
+
+                                                <input type="checkbox" name="list_name"
+                                                    [(ngModel)]="jsonItem.isSelected" value="m1"
+                                                    (change)="isAllSelected()" />
+                                            </td>
+                                            <td scope="col">
+
+                                                <input type="text" class="form-control form-control-sm mandatory"
+                                                    [(ngModel)]="jsonItem.seqNo" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" class="form-control form-control-sm nomandatory"
+                                                    [(ngModel)]="jsonItem.seqNoText" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" class="form-control form-control-sm mandatory"
+                                                    [(ngModel)]="jsonItem.partName" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" class="form-control form-control-sm nomandatory"
+                                                    [(ngModel)]="jsonItem.partCode" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text"
+                                                    class="form-control form-control-sm mandatory text-right"
+                                                    [(ngModel)]="jsonItem.quantity" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" class="form-control form-control-sm mandatory"
+                                                    [(ngModel)]="jsonItem.unit" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text"
+                                                    class="form-control form-control-sm nomandatory text-right"
+                                                    [(ngModel)]="jsonItem.price" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text"
+                                                    class="form-control form-control-sm mandatory text-right"
+                                                    [(ngModel)]="jsonItem.accountNo" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" class="form-control form-control-sm nomandatory"
+                                                    [(ngModel)]="jsonItem.leadTime" />
+                                            </td>
+                                            <td scope="col">
+                                                <select class="form-control form-control-sm nomandatory" name="period"
+                                                    [(ngModel)]="jsonItem.leadTimeperiod">
+                                                    <option value="D">D</option>
+                                                    <option value="W">W</option>
+                                                    <option value="M">M</option>
+                                                    <option value="Y">Y</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

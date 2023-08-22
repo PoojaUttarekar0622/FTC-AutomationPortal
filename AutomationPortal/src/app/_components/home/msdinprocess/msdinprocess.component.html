@@ -1,0 +1,115 @@
+<div class="container-fluid mt-1">
+    <div class="row mt-1">
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Completed</h5>
+                            <span class="h2 font-weight-bold mb-0">{{jsonStatus1.msdCompleted}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats bg-orange">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-white mb-0">INPROCESS</h5>
+                            <span class="h2 font-weight-bold text-white mb-0">{{jsonStatus1.msdInProcess}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-white text-orange rounded-circle shadow">
+                                <i class="fas fa-spinner"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">ERROR</h5>
+                            <span class="h2 font-weight-bold mb-0">{{jsonStatus1.msdError}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total</h5>
+                            <span class="h2 font-weight-bold mb-0">{{jsonStatus1.msdTotal}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-default text-white rounded-circle shadow">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-xl-12 order-xl-2">
+            <div class="card">
+                <div class="card-body">
+                    <ngx-datatable class="bootstrap border selection-cell" [columnMode]="'force'" [headerHeight]="30"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" (activate)="onActivate($event)">
+                        <ngx-datatable-column name="owner name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.owner}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Enq Number">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.enqrefNo}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Ship Name">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.shipName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Email Received Date">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.emailReceiveddate}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="status">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <div *ngIf="(value === 'Inprocess');">
+                                    <span class='text-xs font-italic'>now processing </span>
+                                    <img src="../../../../assets/img/test1.gif" height="7">
+                                </div>
+                                <div *ngIf="(value == 'Verified' || value == 'Updated');">
+                                    {{row.status}}
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

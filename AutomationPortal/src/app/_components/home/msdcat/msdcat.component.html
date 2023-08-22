@@ -1,0 +1,93 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-xl-1"></div>
+        <div class="col-xl-10">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-2 col-form-label text-right">Description Name</label>
+                        <div class="col-sm-3">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="description" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2 text-center">
+                            <button class="btn btn-sm btn-icon btn-primary" (click)="onSave()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="btn-inner--text">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="dataTables_wrapper py-1">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="datatable_length">
+                                    <label>
+                                        Show
+                                        <select name="datatable_length" aria-controls="datatable"
+                                            class="form-control form-control-sm" (change)="entriesChange($event)">
+                                            <option value="10" [selected]="entries == 10">10</option>
+                                            <option value="25" [selected]="entries == 25">25</option>
+                                            <option value="50" [selected]="entries == 50">50</option>
+                                            <option value="-1" [selected]="entries == -1">All</option>
+                                        </select>
+                                        entries
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="datatable_filter" class="dataTables_filter">
+                                    <label>
+                                        <input type="search" class="form-control form-control-sm"
+                                            placeholder="Search records" aria-controls="datatable"
+                                            (keyup)="filterTable($event.target.value)" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                            [rows]="temp" (activate)="onActivate($event)">
+                            <ngx-datatable-column name="S No." [sortable]="false">
+                                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                    {{rowIndex+1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Description" [sortable]="false">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{row.itemName}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Action" [sortable]="false">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <button type="button" (click)="btnAction(row)"
+                                        class="btn btn-danger btn-icon-only-table rounded-circle">
+                                        <i class="fas fa-trash-alt font-weight-bold" matTooltip="Delete"></i>
+                                    </button>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

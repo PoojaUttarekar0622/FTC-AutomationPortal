@@ -1,0 +1,196 @@
+<div class="container-fluid mt-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-stats shadow">
+                <div class="card-header text-right">
+                    <h4 class="font-weight-bold text-green mb-0">{{jsonHeader.sourceType}}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12">
+                                    <h5 class="card-title font-weight-bold  mb-0"> <i
+                                            class="fas fa-user fa-lg text-primary mr-1"></i>
+                                        {{jsonHeader.owner}}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-sm-2 col-form-label"> Enquiry Ref No</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.enqrefNo}}</h4>
+                                </div>
+                                <label class="col-sm-2 col-form-label"> Enquiry Date</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.enquiryDate}}</h4>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-sm-2 col-form-label"> Quotation Number</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-green mb-0 mt-2"> {{jsonHeader.quotationNo}}</h4>
+                                </div>
+                                <label class="col-sm-2 col-form-label mb-0">Ship Name</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2"> {{jsonHeader.shipName}}</h4>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-sm-2 col-form-label mb-0">Equipment</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2"> {{jsonHeader.equipment}}</h4>
+                                </div>
+                                <label class="col-sm-2 col-form-label mb-0"> Maker</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.maker}}</h4>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-sm-2 col-form-label mb-0"> Serial No</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.serialno}}</h4>
+                                </div>
+                                <label class="col-sm-2 col-form-label mb-0"> Type</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.type}}</h4>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-sm-2 col-form-label">Email Received Date</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2"> {{jsonHeader.emailReceiveddate}}
+                                    </h4>
+                                </div>
+                                <label class="col-sm-2 col-form-label"> Email From</label>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title text-muted mb-0 mt-2">{{jsonHeader.emailFrom}}</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2 text-right mt-5">
+                            <a [routerLink]="['/home/msdcomplete']">
+                                <div class="icon icon-shape bg-green text-white rounded-circle shadow">
+                                    <i class="fas fa-chevron-left"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt--4 text-right">
+                        <div class="col-md-12 mb-2">
+
+                            <button type="button" (click)="viewPdf()"
+                                class="btn btn-success btn-icon-only rounded-circle">
+
+                                <i class="fas fa-file-pdf text-sm font-weight-bold" matTooltip="Expand/Collapse"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div [class.col-md-12]="!isShowingDetails" [class.col-md-7]="isShowingDetails">
+                            <ngx-datatable class="bootstrap border selection-cell" [columnMode]="'force'"
+                                [headerHeight]="30" [footerHeight]="50" [rowHeight]="'auto'"
+                                [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="false"
+                                (activate)="onActivate($event)">
+                                <ngx-datatable-column name="#" [sortable]="false" [width]="3">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+
+                                        {{row.seqNo}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="A" [sortable]="false" [width]="3">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.seqNoText}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="DESCRIPTION" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.partName}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Part Code" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.partCode}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Qantity" [sortable]="false" [width]="5">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.quantity}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Unit" [sortable]="false" [width]="20">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.unit}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="price" [sortable]="false" [width]="12">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.cost}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Lead Time" [sortable]="false" [width]="12">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.leadTime}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Period" [sortable]="false" [width]="12">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.leadTimeperiod}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
+                        </div>
+                        <div class="col-md-5" *ngIf="isShowingDetails">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a>
+                                                <i class="fas fa-step-backward text-primary"></i>
+                                            </a> Previous
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <button type="button" (click)="zoomIn()" class="btn btn-success btn-sm"
+                                                data-toggle="tooltip" data-placement="top" ngbTooltip="Add new row">
+                                                <i class="fas fa-search-plus font-weight-bold"></i>
+                                            </button>
+                                            <button type="button" (click)="zoomOut()" class="btn btn-success btn-sm">
+                                                <i class="fas fa-search-minus font-weight-bold"></i>
+                                            </button>
+                                            <button type="button" (click)="resetZoom()" class="btn btn-success btn-sm">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            Next
+                                            <a>
+                                                <i class="fas fa-step-forward text-primary"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="overflow:auto;width:100%;height: 85vh;">
+                                            <pdf-viewer [src]="jsonHeader.docPath" [zoom]="pdfZoom" [fit-to-page]="true"
+                                                useBrowserLocale="true"></pdf-viewer>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

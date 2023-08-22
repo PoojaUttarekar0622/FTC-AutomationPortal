@@ -1,0 +1,285 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-2 col-form-label text-right"> Process Type</label>
+                        <div class="col-sm-2">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <select (change)="onChangeProcessType()" [(ngModel)]="processType" class="form-control">
+                                    <option value="">Choose your Process Type</option>
+                                    <option *ngFor="let processType of jsonProcessType"
+                                        [ngValue]="processType.processType">
+                                        {{ processType.processType }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label text-right"> ML Type</label>
+                        <div class="col-sm-2">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-robot text-red"></i>
+                                        </span>
+                                    </div>
+                                    <select (change)="onChangeMLType()" [(ngModel)]="mlTypeval" class="form-control">
+                                        <option value="">Choose your ML Type</option>
+                                        <option *ngFor="let mlType of mlType" [ngValue]="mlType.mlType">
+                                            {{ mlType.mlType }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div aria-label="Basic example" class="btn-group" role="group">
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 1 }"
+                                        type="button" (click)="btnGroupFilter(1)">
+                                        Today
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 5 }"
+                                        type="button" (click)="btnGroupFilter(5)">
+                                        Weekly
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 2 }"
+                                        type="button" (click)="btnGroupFilter(2)">
+                                        MTD
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 3 }"
+                                        type="button" (click)="btnGroupFilter(3)">
+                                        QTD
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 4 }"
+                                        type="button" (click)="btnGroupFilter(4)">
+                                        YTD
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label text-right"> From Date</label>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <input [(ngModel)]="FromDate" type="text" placeholder="From Date"
+                                        class="form-control" [bsConfig]="{dateInputFormat: 'MM/DD/YYYY'}"
+                                        bsDatepicker />
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label text-right"> To Date</label>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <input [(ngModel)]="ToDate" type="text" placeholder="To Date" class="form-control"
+                                        [bsConfig]="{dateInputFormat: 'MM/DD/YYYY'}" bsDatepicker />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-icon btn-success" (click)="btnSearch()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-filter"></i>
+                                </span>
+                                <span class="btn-inner--text">Show</span>
+                            </button>
+                            <button class="btn btn-sm btn-icon btn-success" (click)="btnAddNewIMPA()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span class="btn-inner--text">Add New IMPA</span>
+                            </button>
+                            <button class="btn btn-sm btn-icon btn-success" (click)="btnExportToExccel()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-file-excel"></i>
+                                </span>
+                                <span class="btn-inner--text">Export To Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7" *ngIf="isIMPAList">
+            <div class=" card">
+                <div class=" card-header">
+                    <h3 class=" mb-0">Machine Learning Master List</h3>
+                </div>
+                <div class="dataTables_wrapper py-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="datatable_length">
+                                <label>
+                                    Show
+                                    <select name="datatable_length" aria-controls="datatable"
+                                        class="form-control form-control-sm" (change)="entriesChange($event)">
+                                        <option value="10" [selected]="entries == 10">10</option>
+                                        <option value="25" [selected]="entries == 25">25</option>
+                                        <option value="50" [selected]="entries == 50">50</option>
+                                        <option value="-1" [selected]="entries == -1">All</option>
+                                    </select>
+                                    entries
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="datatable_filter" class="dataTables_filter">
+                                <label>
+                                    <input type="search" class="form-control form-control-sm"
+                                        placeholder="Search records" aria-controls="datatable"
+                                        (keyup)="filterTable($event.target.value)" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" (activate)="onActivate($event)">
+                        <ngx-datatable-column name="Code" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.description}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Description" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.tempDescription}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Action" [sortable]="false" [width]="3">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button type="button" (click)="btnAction(row.description)"
+                                    class="btn btn-success btn-icon-only-table rounded-circle">
+
+                                    <i class="fas fa-info font-weight-bold" matTooltip="Action"></i>
+                                </button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5" *ngIf="isShowingDetails">
+            <div class=" card">
+                <div class="card-header">
+                    <h3 class=" mb-0">Machine Learning Master List</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4 class="text-green font-weight-bold mb-1">{{description}}</h4>
+                        </div>
+                        <div class="col-md-10 text-right">
+                            <button type="button" (click)="addNewRow()"
+                                class="btn btn-twitter btn-icon-only rounded-circle" data-toggle="tooltip"
+                                data-placement="top" ngbTooltip="Add new row">
+                                <i class="fas fa-plus text-sm font-weight-bold" matTooltip="Add"></i>
+                            </button>
+                            <button type="button" (click)="updateData()"
+                                class="btn btn-facebook btn-icon-only rounded-circle">
+                                <i class="fas fa-check text-sm font-weight-bold" matTooltip="Save"></i>
+                            </button>
+                            <button type="button" (click)="deleteRow()"
+                                class="btn btn-danger btn-icon-only rounded-circle" data-toggle="tooltip"
+                                data-placement="top" ngbTooltip="Delete row">
+                                <i class="fas fa-trash text-sm font-weight-bold" matTooltip="Delete"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table border align-items-center table-flush">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" style="width:5%">
+                                        <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1"
+                                            (change)="checkUncheckAll()" />
+                                    </th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let jsonItem of jsonListData;let i = index">
+                                    <td>
+                                        <input type="checkbox" name="list_name" [(ngModel)]="jsonItem.isSelected"
+                                            value="m1" (change)="isAllSelected()" />
+                                    </td>
+                                    <td scope="col">
+                                        <input type="text" class="form-control form-control-sm mandatory"
+                                            [(ngModel)]="jsonItem.tempDescription" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" *ngIf="isAddNewIMPA">
+            <div class=" card">
+                <div class="card-header">
+                    <h3 class=" mb-0">Add New IMPA</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table border align-items-center table-flush">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">IMPA Code</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let jsonIMPA of jsonNewIMPA;let i = index">
+                                    <td scope="col">
+                                        <input type="text" class="form-control form-control-sm mandatory"
+                                            [(ngModel)]="jsonIMPA.description" />
+                                    </td>
+                                    <td scope="col">
+                                        <input type="text" class="form-control form-control-sm mandatory"
+                                            [(ngModel)]="jsonIMPA.tempDescription" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-sm btn-icon btn-primary" (click)="updateIMPA()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="btn-inner--text">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

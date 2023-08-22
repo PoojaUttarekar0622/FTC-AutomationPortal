@@ -1,0 +1,127 @@
+//
+// Table
+//
+
+// General styles
+
+.table {
+  thead th {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: $table-head-font-size;
+    text-transform: $table-head-text-transform;
+    letter-spacing: $table-head-letter-spacing;
+    border-bottom: $table-border-width solid $table-border-color;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  td {
+    .progress {
+      height: 3px;
+      width: 120px;
+      margin: 0;
+    }
+  }
+
+  td,
+  th {
+    font-size: $table-body-font-size;
+    white-space: nowrap;
+  }
+
+  // Vetical align table content
+
+  &.align-items-center {
+    td,
+    th {
+      vertical-align: middle;
+    }
+  }
+
+  // Styles for dark table
+
+  .thead-dark {
+    th {
+      background-color: $table-dark-head-bg;
+      color:#fff; //$table-dark-head-color;
+
+      a {
+        color: #fff//$table-dark-head-color;
+      }
+    }
+  }
+
+  // Styles for light table
+
+  .thead-light {
+    th {
+      background-color: $table-head-bg;
+      color: $table-head-color;
+
+      a {
+        color: $table-head-color;
+      }
+    }
+  }
+}
+
+// Add transition for hover state
+
+.table-hover {
+  tr {
+    @include transition($transition-base);
+  }
+}
+
+// Flush tables
+
+.table-flush {
+  td,
+  th {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  tbody {
+    tr {
+      &:first-child {
+        td,
+        th {
+          border-top: 0;
+        }
+      }
+
+      &:last-child {
+        td,
+        th {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// Tables inside cards
+
+.card {
+  .table {
+    margin-bottom: 0;
+
+    td,
+    th {
+      padding-left:0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+}
+
+// Fixes for custom elements inside tables
+
+.table {
+  .custom-toggle {
+    display: block;
+  }
+}

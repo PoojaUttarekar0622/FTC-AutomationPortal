@@ -1,0 +1,150 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-9">
+            <div class=" card">
+                <div class=" card-header">
+                    <h3 class=" mb-0">PIC Details</h3>
+                </div>
+                <div class="dataTables_wrapper py-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="datatable_length">
+                                <label>
+                                    Show
+                                    <select name="datatable_length" aria-controls="datatable"
+                                        class="form-control form-control-sm" (change)="entriesChange($event)">
+                                        <option value="10" [selected]="entries == 10">10</option>
+                                        <option value="25" [selected]="entries == 25">25</option>
+                                        <option value="50" [selected]="entries == 50">50</option>
+                                        <option value="-1" [selected]="entries == -1">All</option>
+                                    </select>
+                                    entries
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="datatable_filter" class="dataTables_filter">
+                                <label>
+                                    <input type="search" class="form-control form-control-sm"
+                                        placeholder="Search records" aria-controls="datatable"
+                                        (keyup)="filterTable($event.target.value)" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ngx-datatable class="bootstrap selection-cell" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined"
+                        [rows]="temp" (activate)="onActivate($event)">
+                        <ngx-datatable-column name="Template Customer" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.templateCustomerName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="AS400 Customer" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.aS400CustomerName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="AS400 UserID" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.aS400UserId}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Email Id" [sortable]="false">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row.customerEmailId}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Action" [sortable]="false" [width]="3">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <button type="button" (click)="btnAction(row)"
+                                    class="btn btn-success btn-icon-only-table rounded-circle">
+
+                                    <i class="fas fa-info font-weight-bold" matTooltip="Action"></i>
+                                </button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div> 
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class=" card">
+                <div class="card-header">
+                    <h3 class=" mb-0">Edit PIC Details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-12 col-form-label">Template Customer Name</label>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="templateCustomerName" class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-12 col-form-label">AS400 Customer Name</label>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="AS400CustomerName" class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-12 col-form-label">AS400 User ID</label>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="AS400UserID" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-12 col-form-label">Email ID</label>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tasks text-red"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="emailId" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-icon btn-primary" (click)="onUpdate()">
+                        <span class="btn-inner--icon">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="btn-inner--text">Update</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="container-fluid" *ngIf="showMainContent">
+    <div class="row mt-2">
+        <div class="col-xl-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-user-md text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control"
+                                        placeholder="Customer Name/Ship Name/Ref Number/" [(ngModel)]="customername" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <input [(ngModel)]="FromDate" type="text" placeholder="From Date"
+                                        class="form-control" [bsConfig]="{dateInputFormat: 'MM/DD/YYYY'}"
+                                        bsDatepicker />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div class="input-group input-group-sm input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <input [(ngModel)]="ToDate" type="text" placeholder="To Date"
+                                        class="form-control" [bsConfig]="{dateInputFormat: 'MM/DD/YYYY'}"
+                                        bsDatepicker />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group mb-0">
+                                <div aria-label="Basic example" class="btn-group" role="group">
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 1 }" type="button"
+                                        (click)="btnGroupFilter(1)">
+                                        Today
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 2 }" type="button"
+                                        (click)="btnGroupFilter(2)">
+                                        MTD
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 3 }" type="button"
+                                        (click)="btnGroupFilter(3)">
+                                        QTD
+                                    </button>
+                                    <button class=" btn btn-sm btn-primary" [ngClass]="{ 'active' : isValue == 4 }" type="button"
+                                        (click)="btnGroupFilter(4)">
+                                        YTD
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <button class="btn btn-sm btn-icon btn-primary" (click)="btnSearch()">
+                                <span class="btn-inner--icon">
+                                    <i class="fas fa-search fa-lg"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-xl-4 order-xl-2" *ngFor="let status of jsonStatus">
+            <a (click)="btn_action(status)">
+                <div [ngClass]="{'bg-card-default': status.saveAsDraft === 'saveInVerification'}"
+                    class="card card-stats shadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title font-weight-bold  mb-0">
+                                    <i *ngIf="(status.action == 'YES');" class="fas fa-lock fa-lg text-red mr-2"></i>
+                                    <i *ngIf="(status.action == '');" class="fas fa-user fa-lg text-green mr-2"></i>
+                                    {{status.owner}}
+                                </h5>
+                            </div>
+                            <div class="col-auto text-muted mb-1">
+                                <button type="button" class="btn btn-sm btn-twitter btn-icon-only rounded-circle">
+                                    {{status.totalNoOfItems}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-title text-muted mb-0 ml-2">{{status.shipName}}</h6>
+                            </div>
+                            <div class="col-auto text-muted mb-1">
+                                <h6 class="card-title text-muted mb-0">{{status.enquiryDate}}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-title text-muted mb-0 ml-2">{{status.enqrefNo}}</h6>
+                            </div>
+                            <div class="col" *ngIf="status.saveAsDraft === 'saveInVerification'">
+                                <h5 class="card-title mb-0 font-weight-bold text-saveasdraft">Draft Saved</h5>
+                            </div>
+                            <div class="col-auto mb-1">
+                                <h5 class="card-title mb-0 text-green">{{status.duration}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div *ngIf="showdetails">
+    <app-mdetails [jsonpass]="JsonObj" (routetoparentevent)="showbtnBackContent($event)"></app-mdetails>
+</div>
